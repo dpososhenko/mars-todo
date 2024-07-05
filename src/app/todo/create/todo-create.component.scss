@@ -1,0 +1,8 @@
+.action {
+  color: var(--bs-gray-400);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--bs-primary);
+  }
+}

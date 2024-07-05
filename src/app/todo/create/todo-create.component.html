@@ -1,0 +1,40 @@
+<nb-card>
+  <nb-card-header>
+    <nb-icon [routerLink]="['../list']" class="action mb-3" icon="arrow-back"></nb-icon>
+    <div>Add Todo</div>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="todoForm"
+          (ngSubmit)="save()"
+          novalidate
+          class="d-flex flex-column gap-2">
+      <input formControlName="title"
+             nbInput
+             fullWidth
+             shape="round"
+             placeholder="Title">
+
+      <textarea formControlName="description"
+                nbInput
+                fullWidth
+                shape="round"
+                placeholder="Description">
+      </textarea>
+
+      <div>
+        <input nbInput
+               shape="round"
+               formControlName="dueDate"
+               placeholder="Due date"
+               [nbDatepicker]="dateTimePicker">
+
+        <nb-datepicker #dateTimePicker></nb-datepicker>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-layout-footer>
+    <div class="d-flex justify-content-end w-100">
+      <button (click)="save()" nbButton status="primary" shape="round">Add Todo</button>
+    </div>
+  </nb-layout-footer>
+</nb-card>

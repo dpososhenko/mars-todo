@@ -1,0 +1,39 @@
+<nb-card>
+  <nb-card-body>
+    <div *ngIf="todos.length >= 1">
+      <nb-card [routerLink]="['../edit', todo.id]"
+               class="card"
+               [ngClass]="{ 'bg-body-secondary': todo.status === TodoStatus.DONE }"
+               *ngFor="let todo of todos;">
+        <nb-card-body>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fs-5 fw-bold"
+                   [ngClass]="{ 'text-decoration-line-through': todo.status === TodoStatus.DONE }">{{ todo.title }}</div>
+              <small class="text-body-tertiary">Due to {{ todo.dueDate }}</small>
+            </div>
+
+            <div class="d-flex gap-2">
+              <nb-icon *ngIf="todo.status === TodoStatus.IN_PROGRESS"
+                       (click)="done(todo)"
+                       class="action"
+                       icon="checkmark-square">
+              </nb-icon>
+              <nb-icon (click)="delete(todo)"
+                       class="action"
+                       icon="archive">
+              </nb-icon>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <button nbButton
+            status="primary"
+            shape="round"
+            [routerLink]="['../create']">
+      Add Todo
+    </button>
+  </nb-card-body>
+</nb-card>
