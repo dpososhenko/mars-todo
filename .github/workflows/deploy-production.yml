@@ -1,4 +1,4 @@
-name: Deploy application
+name: Deploy production application
 
 on:
   push:
@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   publish:
-    name: Publish
+    name: Deploy production
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
