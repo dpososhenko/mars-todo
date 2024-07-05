@@ -1,0 +1,42 @@
+<nb-card>
+  <nb-card-header>
+    <nb-icon [routerLink]="['../../list']" class="action mb-3" icon="arrow-back"></nb-icon>
+
+    <div>{{ todoForm.value.title }}</div>
+    <div><small>Status: {{ todoForm.value.status }}</small></div>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="todoForm"
+          novalidate
+          class="d-flex flex-column gap-2">
+
+      <textarea formControlName="description"
+                nbInput
+                fullWidth
+                shape="round"
+                placeholder="Description">
+      </textarea>
+
+      <div>
+        <input nbInput
+               shape="round"
+               formControlName="dueDate"
+               placeholder="Due date"
+               [nbDatepicker]="dateTimePicker">
+
+        <nb-datepicker #dateTimePicker></nb-datepicker>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-layout-footer>
+    <div class="d-flex justify-content-end w-100">
+      <button [disabled]="!todoForm.dirty"
+              (click)="update()"
+              nbButton
+              status="primary"
+              shape="round">
+        Update
+      </button>
+    </div>
+  </nb-layout-footer>
+</nb-card>
