@@ -2,8 +2,8 @@ name: Deploy application
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
   workflow_dispatch:
 
 concurrency:
