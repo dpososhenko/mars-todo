@@ -1,9 +1,9 @@
-name: Deploy application
+name: Deploy preview application
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
   workflow_dispatch:
 
 concurrency:
@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   publish:
-    name: Publish
+    name: Deploy preview
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -1,0 +1,44 @@
+name: Deploy production application
+
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.repository }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    name: Deploy production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          cache: npm
+          cache-dependency-path: ./package-lock.json
+
+      - name: Install Netlify
+        run: npm install netlify-cli@17.10.1 -g
+
+      - name: Install npm dependencies
+        shell: bash
+        run: npm ci --ignore-scripts
+
+      - name: Build project
+        shell: bash
+        run: npm run build
+
+      - name: Deploy to Netlify
+        id: netlify_deploy
+        run: |
+          netlify deploy --prod \
+            --dir dist \
+            --site ${{ secrets.NETLIFY_SITE_ID }} \
+            --auth ${{ secrets.NETLIFY_API_TOKEN }}
