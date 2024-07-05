@@ -24,8 +24,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref || inputs.ref }}
-      - name: Prettier
+      - name: Lint
         run: npm run lint
+
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -36,6 +37,7 @@ jobs:
           ref: ${{ github.head_ref || inputs.ref }}
       - name: Prettier
         run: npm run test
+
   audit:
     name: NPM Audit
     runs-on: ubuntu-latest
